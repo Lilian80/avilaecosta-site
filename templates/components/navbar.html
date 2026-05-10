@@ -1,0 +1,22 @@
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="brand-clean" href="{{ url_for('main.index') }}" aria-label="Avila&Costa">
+            <img
+                src="{{ url_for('static', filename='img/branding/logo_principal_h.png') }}"
+                alt="Avila&Costa Gestão e Inovação em Saúde"
+                class="brand-clean-logo">
+        </a>
+
+        <nav class="nav-clean" aria-label="Menu principal">
+            <a href="{{ url_for('main.index') }}">Início</a>
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#servicos">Soluções</a>
+            <a href="#metodo">Método J.O.I.A.</a>
+            <a href="{{ url_for('main.lista') }}">Diagnósticos</a>
+        </nav>
+
+        <a class="nav-clean-cta" href="{{ url_for('main.diagnostico') }}">
+            Iniciar diagnóstico
+        </a>
+    </div>
+</header>

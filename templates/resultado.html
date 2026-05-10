@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Resultado do diagnóstico | Avila&Costa{% endblock %}
+
+{% block content %}
+<section class="shell result-hero">
+    <div>
+        <span class="eyebrow">Resultado do diagnóstico</span>
+        <h1>{{ diagnostico.nome_clinica or 'Clínica avaliada' }}</h1>
+        <p>{{ diagnostico.especialidade or 'Especialidade não informada' }} · {{ diagnostico.cidade or 'Cidade não informada' }} · {{ diagnostico.criado_em }}</p>
+    </div>
+    <div class="result-score {{ diagnostico.nivel_risco|lower }}">
+        <strong>{{ diagnostico.percentual_conformidade }}%</strong>
+        <span>{{ diagnostico.nivel_risco }}</span>
+    </div>
+</section>
+
+<section class="shell result-grid">
+    <article class="result-card">
+        <h2>Leitura executiva</h2>
+        <p>
+            Este percentual representa a maturidade inicial da clínica nos blocos avaliados. Use este resultado para priorizar processos, treinamento, IA aplicada e plano 5W2H.
+        </p>
+        <div class="kpi-row">
+            <div><strong>{{ diagnostico.total_avaliavel }}</strong><span>itens avaliados</span></div>
+            <div><strong>{{ diagnostico.pontuacao_total }}</strong><span>pontuação</span></div>
+            <div><strong>{{ diagnostico.nivel_risco }}</strong><span>nível</span></div>
+        </div>
+    </article>
+    <article class="result-card accent-card">
+        <h2>Próxima entrega</h2>
+        <p>Transformar este diagnóstico em relatório PDF, proposta de consultoria, planilha de diagnóstico e dashboard de acompanhamento.</p>
+        <a class="btn btn-primary" href="{{ url_for('main.diagnostico') }}">Novo diagnóstico</a>
+    </article>
+</section>
+
+<section class="shell table-card">
+    <div class="table-heading">
+        <h2>Respostas por bloco</h2>
+        <a class="btn btn-ghost" href="{{ url_for('main.lista') }}">Voltar aos diagnósticos</a>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Bloco</th><th>Pergunta</th><th>Resposta</th><th>Observação</th></tr>
+            </thead>
+            <tbody>
+                {% for item in respostas %}
+                    <tr>
+                        <td>{{ item.bloco_titulo }}</td>
+                        <td>{{ item.pergunta }}</td>
+                        <td><span class="status-pill">{{ item.resposta }}</span></td>
+                        <td>{{ item.observacao or '-' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% if plano %}
+<section class="shell table-card">
+    <h2>Plano 5W2H</h2>
+    <div class="plan-grid">
+        <div><span>What</span><p>{{ plano.what or '-' }}</p></div>
+        <div><span>Why</span><p>{{ plano.why or '-' }}</p></div>
+        <div><span>Where</span><p>{{ plano.where_text or '-' }}</p></div>
+        <div><span>Who</span><p>{{ plano.who or '-' }}</p></div>
+        <div><span>When</span><p>{{ plano.when_text or '-' }}</p></div>
+        <div><span>How</span><p>{{ plano.how or '-' }}</p></div>
+        <div><span>How Much</span><p>{{ plano.how_much or '-' }}</p></div>
+        <div><span>Status</span><p>{{ plano.status or '-' }}</p></div>
+        <div class="full"><span>Evidência</span><p>{{ plano.evidencia or '-' }}</p></div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

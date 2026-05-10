@@ -1,0 +1,42 @@
+<section class="business-hero">
+    <div class="business-hero-overlay"></div>
+
+    <div class="shell business-hero-grid">
+        <div class="business-hero-copy reveal">
+            <span class="hero-label">Avila&Costa Gestão e Inovação em Saúde</span>
+
+            <h1>
+                Gestão, processos e inteligência para clínicas mais organizadas e seguras.
+            </h1>
+
+            <p>
+                Apoiamos médicos e clínicas na estruturação da operação, organização de equipes,
+                controle de insumos, melhoria da experiência do paciente e uso estratégico da
+                inteligência artificial na gestão em saúde.
+            </p>
+
+            <div class="business-hero-actions">
+                <a href="{{ url_for('main.diagnostico') }}" class="btn-business-primary">
+                    Iniciar diagnóstico
+                </a>
+
+                <a href="#metodo" class="btn-business-outline">
+                    Conhecer o método
+                </a>
+            </div>
+        </div>
+
+        <aside class="hero-consultoria-card reveal delay-1">
+            <img
+                src="{{ url_for('static', filename='img/branding/consultora.png') }}"
+                alt="Consultoria em clínica médica"
+                class="hero-consultoria-img"
+            >
+
+            <div class="hero-consultoria-caption">
+                <span>Método J.O.I.A.</span>
+                <strong>Gestão lapidada para clínicas mais organizadas, inteligentes e seguras.</strong>
+            </div>
+        </aside>
+    </div>
+</section>

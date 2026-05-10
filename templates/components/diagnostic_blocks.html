@@ -1,0 +1,40 @@
+<section class="section-pad diagnostic-premium-section" id="blocos">
+    <div class="shell split-premium">
+        <div class="section-heading compact reveal">
+            <span class="premium-kicker light">Diagnóstico Inteligente</span>
+            <h2>12 blocos para enxergar a clínica como negócio, serviço e experiência.</h2>
+            <p>
+                Cada bloco revela oportunidades de melhoria em gestão, segurança,
+                eficiência, comunicação e valor percebido pelo paciente.
+            </p>
+
+            <a href="{{ url_for('main.diagnostico') }}" class="btn-premium btn-premium-primary">
+                Começar diagnóstico
+            </a>
+        </div>
+
+        <div class="premium-blocks-grid">
+            {% set blocos = [
+                'Dados da clínica',
+                'Jornada da paciente',
+                'Atendimento e recepção',
+                'Agenda e conversão',
+                'Enfermagem e apoio técnico',
+                'Compras, estoque e insumos',
+                'RH e equipe',
+                'Processos e documentos',
+                'Indicadores e gestão',
+                'Divulgação e experiência da paciente',
+                'IA e tecnologia',
+                'Plano de ação 5W2H'
+            ] %}
+
+            {% for bloco in blocos %}
+                <article class="premium-block-card reveal">
+                    <span>{{ "%02d"|format(loop.index) }}</span>
+                    <strong>{{ bloco }}</strong>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

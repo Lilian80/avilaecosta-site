@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Novo diagnóstico | Avila&Costa{% endblock %}
+
+{% block content %}
+<section class="page-hero shell">
+    <span class="eyebrow">Diagnóstico Inteligente da Clínica</span>
+    <h1>Preencha os 12 blocos e gere uma visão inicial de maturidade da clínica.</h1>
+    <p>Use como instrumento profissional para consultoria, relatório, plano 5W2H e evolução futura para dashboard.</p>
+</section>
+
+<form class="shell diagnostic-layout" method="post">
+    <aside class="form-sidebar">
+        <strong>Blocos</strong>
+        {% for bloco in blocos %}
+            <a href="#{{ bloco.id }}"><span>{{ bloco.numero }}</span>{{ bloco.titulo }}</a>
+        {% endfor %}
+        <button class="btn btn-primary btn-full" type="submit">Salvar diagnóstico</button>
+    </aside>
+
+    <div class="form-flow">
+        {% for bloco in blocos %}
+            <section class="diagnostic-card" id="{{ bloco.id }}">
+                <div class="card-heading">
+                    <span>{{ bloco.numero }}</span>
+                    <div>
+                        <h2>{{ bloco.titulo }}</h2>
+                        <p>{{ bloco.descricao }}</p>
+                    </div>
+                </div>
+
+                {% if bloco.tipo is defined and bloco.tipo == 'dados' %}
+                    <div class="field-grid two">
+                        {% for campo, label in bloco.campos %}
+                            <label class="field">
+                                <span>{{ label }}</span>
+                                <input type="text" name="{{ campo }}" placeholder="Digite {{ label|lower }}">
+                            </label>
+                        {% endfor %}
+                    </div>
+                {% elif bloco.tipo is defined and bloco.tipo == '5w2h' %}
+                    <div class="field-grid two">
+                        <label class="field"><span>What - O que será feito?</span><textarea name="what" rows="3"></textarea></label>
+                        <label class="field"><span>Why - Por que será feito?</span><textarea name="why" rows="3"></textarea></label>
+                        <label class="field"><span>Where - Onde?</span><input type="text" name="where" placeholder="Nesta UBS / nesta clínica / setor..."></label>
+                        <label class="field"><span>Who - Quem será responsável?</span><input type="text" name="who"></label>
+                        <label class="field"><span>When - Quando?</span><input type="text" name="when" placeholder="30 dias, 60 dias, data prevista..."></label>
+                        <label class="field"><span>How - Como será feito?</span><textarea name="how" rows="3"></textarea></label>
+                        <label class="field"><span>How Much - Recurso/carga horária</span><input type="text" name="how_much" placeholder="Ex.: até 4h semanais"></label>
+                        <label class="field"><span>Status</span>
+                            <select name="status">
+                                <option>Planejado</option>
+                                <option>Em execução</option>
+                                <option>Concluído</option>
+                                <option>Pendente</option>
+                            </select>
+                        </label>
+                        <label class="field full"><span>Evidência de conclusão</span><textarea name="evidencia" rows="3"></textarea></label>
+                    </div>
+                {% else %}
+                    {% for pergunta in bloco.perguntas %}
+                        {% set idx = loop.index %}
+                        <div class="question-card">
+                            <p>{{ pergunta }}</p>
+                            <div class="option-grid">
+                                {% for opcao in ['Satisfatório', 'Parcial', 'Insatisfatório', 'Não se aplica'] %}
+                                    <label>
+                                        <input type="radio" name="{{ bloco.id }}_{{ idx }}" value="{{ opcao }}" {% if opcao == 'Parcial' %}checked{% endif %}>
+                                        <span>{{ opcao }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                            <label class="field compact-field">
+                                <span>Observação</span>
+                                <textarea name="{{ bloco.id }}_{{ idx }}_obs" rows="2" placeholder="Registre evidências, riscos ou oportunidades..."></textarea>
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </section>
+        {% endfor %}
+
+        <section class="diagnostic-card">
+            <div class="card-heading">
+                <span>+</span>
+                <div>
+                    <h2>Observações gerais</h2>
+                    <p>Use este espaço para registrar contexto, prioridade ou decisão estratégica.</p>
+                </div>
+            </div>
+            <label class="field">
+                <span>Observações gerais do diagnóstico</span>
+                <textarea name="observacoes_gerais" rows="5"></textarea>
+            </label>
+            <div class="submit-row">
+                <button class="btn btn-primary" type="submit">Salvar diagnóstico</button>
+                <a class="btn btn-ghost" href="{{ url_for('main.index') }}">Cancelar</a>
+            </div>
+        </section>
+    </div>
+</form>
+{% endblock %}
