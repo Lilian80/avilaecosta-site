@@ -952,7 +952,7 @@ td { color: #334155; }
 
 @media (max-width: 768px) {
     .site-header {
-        min-height: auto;
+        min-height: initial;
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
@@ -1326,7 +1326,7 @@ td { color: #334155; }
 @media (max-width: 1080px) {
     .topbar-inner {
         grid-template-columns: 1fr auto;
-        min-height: auto;
+        min-height: initial;
         padding: 16px 0;
     }
 
@@ -1371,7 +1371,7 @@ td { color: #334155; }
     }
 
     .business-hero {
-        min-height: auto;
+       min-height: initial;
     }
 
     .business-hero-grid {
@@ -1815,7 +1815,7 @@ td { color: #334155; }
 @media (max-width: 1080px) {
     .topbar-inner {
         grid-template-columns: 1fr auto;
-        min-height: auto;
+        min-height: initial;
         padding: 14px 0;
     }
 
@@ -2193,7 +2193,7 @@ td { color: #334155; }
 @media (max-width: 1080px) {
     .topbar-inner {
         grid-template-columns: 1fr auto;
-        min-height: auto;
+        min-height: initial;
         padding: 14px 0;
     }
 
@@ -2236,7 +2236,7 @@ td { color: #334155; }
     }
 
     .business-hero {
-        min-height: auto;
+        min-height: initial;
     }
 
     .business-hero-grid {
